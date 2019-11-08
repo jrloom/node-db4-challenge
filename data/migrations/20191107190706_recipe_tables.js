@@ -6,13 +6,13 @@ exports.up = function(knex) {
     })
     .createTable("recipe_instructions", tbl => {
       tbl.increments();
+      tbl.string("instructions").notNullable();
       tbl
         .integer("recipe_id")
         .unsigned()
         .notNullable()
         .references("id")
         .inTable("recipes");
-      tbl.string("instructions").notNullable();
     })
     .createTable("ingredients", tbl => {
       tbl.increments();
@@ -32,6 +32,11 @@ exports.up = function(knex) {
         .notNullable()
         .references("id")
         .inTable("ingredients");
+      tbl
+        .integer("quantity")
+        .unsigned()
+        .notNullable();
+      tbl.string("measurement").notNullable();
     });
 };
 
